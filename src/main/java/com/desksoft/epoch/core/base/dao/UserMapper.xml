@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.desksoft.epoch.core.base.dao">
+
+<!-- 
+	<resultMap type="Role" id="userRoleMap">
+		<association property="role" select="selectRole" column="role_id" javaType="Role">
+			<id property="id" column="id"/>  
+			<result property="name" column="name"/>  
+			<result property="description" column="description"/>  
+			<result property="createTime" column="create_time"/>  
+			<result property="latestUpdateTime" column="latest_update_time"/>  
+		</association>
+	</resultMap>
+	<select id="selectRole" resultType="Role">
+		select * from role where id = #{id} and is_delete = 0
+	</select>
+ -->
+	<select id="selectUser" parameterType="hashmap" resultType="User">
+		select * from user where is_delete = '0'
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="username != null">
+			and username = #{username}
+		</if>
+		<if test="password != null">
+			and password = #{password}
+		</if>
+	</select>
+	<select id="selectUserById" parameterType="string" resultType="User">
+		select * from user
+		where is_delete = '0' 
+		and id = #{id}
+	</select>
+	<select id="selectUsers" parameterType="hashmap" resultType="User">
+		select * from user where is_delete = '0'
+		<if test="username != null">
+			and username like '%${username}%'
+		</if>
+		<if test="honeyName != null">
+			and honey_name like '%${honeyName}%'
+		</if>
+		<if test="status != null">
+			and status = #{status}
+		</if>
+	</select>
+	
+	<select id="selectUserRoles" parameterType="hashmap" resultType="Role">
+		select b.* from user_role a, role b where a.user_id = #{userId} and a.role_id = b.id 
+	</select>
+	
+	<delete id="deleteUserRole" parameterType="hashmap">
+		delete from user_role where user_id = #{userId} and role_id = #{roleId}
+	</delete>
+	
+	<select id="selectUserRole" parameterType="int" resultType="Role">
+		select * from role where id = #{id}
+	</select>
+	
+	<insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+		insert into user (username, password, honey_name, create_time, latest_update_time)
+		values(#{username}, #{password}, #{honeyName}, now(), now())
+		<selectKey  order="AFTER" keyProperty="id" resultType="Integer">
+			select last_insert_id() 
+		</selectKey> 
+	</insert>
+	
+	<insert id="addUserRole" parameterType="hashmap" useGeneratedKeys="true" keyProperty="id" >
+		insert into user_role(user_id, role_id) values (#{userId}, #{roleId})
+	</insert>
+	
+	<update id="deleteUserById" parameterType="String">
+		update user set
+			 is_delete = '1'
+		where id = #{id}
+	</update>
+	
+	<update id="deleteUserByIdList" parameterType="java.util.List">
+		update user set 
+			is_delete = '1'
+		where id in 	
+		<foreach item="idItem" index="index" collection="list"
+		      open="(" separator="," close=")">
+		        #{idItem}
+ 		</foreach>
+	</update>
+	
+	<update id="updateUser" parameterType="User">
+		update user set
+			<if test="username != null">
+				username = #{username},
+			</if>
+			<if test="password != null">
+				password = #{password},
+			</if>
+			<if test="honeyName != null">
+				honey_name = #{honeyName},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="isDelete != null">
+				is_delete = #{isDelete, jdbcType=INTEGER, javaType=Boolean},
+			</if>
+			latest_update_time = now()
+		where id = #{id}	
+	</update>
+</mapper>

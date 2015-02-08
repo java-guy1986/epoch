@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.desksoft.epoch.core.base.dao">
+	
+	<insert id="addModule" parameterType="Module" useGeneratedKeys="true" keyProperty="id">
+		insert into module(pid, name, description, is_leaf, url_path, create_time, latest_update_time)
+			values(#{pid}, #{name}, #{description}, 1, #{urlPath},  now(), now())
+		<selectKey  order="AFTER" keyProperty="id" resultType="Integer">
+			select last_insert_id() 
+		</selectKey> 
+	</insert>
+	
+	<update id="updateModule" parameterType="Module">
+		update module set 
+		<if test="name != null">
+			name = #{name}, 
+		</if>
+		<if test="description != null">
+			description = #{description},
+		</if>
+		<if test="isLeaf != null">
+			is_leaf = #{isLeaf, jdbcType=INTEGER, javaType=Boolean},
+		</if>
+		<if test="urlPath != null">
+			url_path = #{urlPath},
+		</if>
+		latest_update_time = now()
+		where id = #{id}
+	</update>
+	
+	<update id="deleteModule" parameterType="int">
+		update module set is_delete = 1 where id = #{id}
+	</update>
+	
+	<select id="selectModules" parameterType="hashmap" resultType="Module">
+		select * from module where pid = #{id} and is_delete = 0
+	</select>
+	
+	<select id="selectModuleById" parameterType="int" resultType="Module">
+		select * from module where id = #{id} and is_delete = 0
+	</select>
+	
+	<select id="selectModuleByName" parameterType="String" resultType="Module">
+		select * from module where name = #{name} and is_delete = 0
+	</select>
+</mapper>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<desksoft>
+	<users>
+		<user name="张三" password="123456" honeyName="啊张"></user>
+		<user name="李四" password="123456" honeyName="啊四"></user>
+		<user name="王五" password="123456" honeyName="啊五"></user>
+		<user name="赵六" password="123456" honeyName="啊赵"></user>
+		<user name="孙七" password="123456" honeyName="啊孙"></user>
+		<user name="宋八" password="123456" honeyName="啊宋"></user>
+		<user name="冷血" password="123456" honeyName="冷血"></user>
+		<user name="铁手" password="123456" honeyName="铁手"></user>
+		<user name="无情" password="123456" honeyName="无情"></user>
+		<user name="追命" password="123456" honeyName="追命"></user>
+		<user name="张龙" password="123456" honeyName="张龙"></user>
+		<user name="赵虎" password="123456" honeyName="赵虎"></user>
+		<user name="王朝" password="123456" honeyName="王朝"></user>
+		<user name="马汉" password="123456" honeyName="马汉"></user>
+		<user name="张昭" password="123456" honeyName="御猫"></user>
+	</users>
+	<roles>
+		<role name="系统管理员" description="系统管理员"></role>
+		<role name="数据录入员" description="数据录入人员"></role>
+		<role name="商品管理员" description="商品管理员"></role>
+		<role name="大区经理" description="大区经理"></role>
+		<role name="总经理" description="总经理"></role>
+		<role name="总裁" description="总裁"></role>
+	</roles>
+	<user-roles>
+		<user-role username="张三" roleName="系统管理员"></user-role>
+		<user-role username="张三" roleName="数据录入员"></user-role>
+		<user-role username="李四" roleName="系统管理员"></user-role>
+		<user-role username="李四" roleName="数据录入员"></user-role>
+		<user-role username="王五" roleName="商品管理员"></user-role>
+		<user-role username="王五" roleName="大区经理"></user-role>
+		<user-role username="赵六" roleName="总经理"></user-role>
+		<user-role username="孙七" roleName="数据录入员"></user-role>
+		<user-role username="宋八" roleName="系统管理员"></user-role>
+		<user-role username="宋八" roleName="数据录入员"></user-role>
+		<user-role username="冷血" roleName="系统管理员"></user-role>
+		<user-role username="铁手" roleName="系统管理员"></user-role>
+		<user-role username="无情" roleName="系统管理员"></user-role>
+		<user-role username="追命" roleName="系统管理员"></user-role>
+		<user-role username="张龙" roleName="系统管理员"></user-role>
+		<user-role username="赵虎" roleName="系统管理员"></user-role>
+		<user-role username="王朝" roleName="系统管理员"></user-role>
+		<user-role username="马汉" roleName="系统管理员"></user-role>
+		<user-role username="张昭" roleName="系统管理员"></user-role>
+	</user-roles>
+	<modules>
+		<module name="用户管理" parentModuleName="" urlPath="user/userlist.do?"></module>
+		<module name="角色分配" parentModuleName="用户管理" urlPath="user/userole.do?"></module>
+		<module name="商品管理" parentModuleName="" urlPath="goods/goodslist.do?"></module>
+		<module name="商品类别" parentModuleName="商品管理" urlPath="goods/goodscategory.do?"></module>
+		<module name="商品品牌" parentModuleName="商品管理" urlPath="goods/goodsbrands.do?"></module>
+		<module name="站点管理" parentModuleName="" urlPath="site/sitelist.do?"></module>
+		<module name="栏目管理" parentModuleName="" urlPath="category/categorylist.do?"></module>
+		<module name="角色管理" parentModuleName="" urlPath="role/rolelist.do?"></module>
+	</modules>
+	<acls>
+		<acl roleName="系统管理员" moduleName="用户管理" create="true" read="true" delete="true" update="true"></acl>	
+		<acl roleName="系统管理员" moduleName="角色分配" create="true" read="true" delete="true" update="true"></acl>		
+		<acl roleName="系统管理员" moduleName="商品管理" create="true" read="true" delete="true" update="true"></acl>
+		<acl roleName="系统管理员" moduleName="商品类别" create="true" read="true" delete="true" update="true"></acl>
+		<acl roleName="系统管理员" moduleName="商品品牌" create="true" read="true" delete="true" update="true"></acl>
+		<acl roleName="系统管理员" moduleName="站点管理" create="true" read="true" delete="true" update="true"></acl>
+		<acl roleName="系统管理员" moduleName="栏目管理" create="true" read="true" delete="true" update="true"></acl>
+		<acl roleName="系统管理员"  moduleName="角色管理" create="true" read="true" delete="true" update="true"></acl>
+		
+		<acl roleName="数据录入员" moduleName="用户管理" create="false" read="true" delete="false" update="false"></acl>	
+		<acl roleName="数据录入员" moduleName="角色分配" create="true" read="true" delete="true" update="true"></acl>		
+		<acl roleName="数据录入员" moduleName="商品管理" create="true" read="true" delete="true" update="true"></acl>
+		<acl roleName="数据录入员" moduleName="商品类别" create="true" read="true" delete="true" update="true"></acl>
+		<acl roleName="数据录入员" moduleName="商品品牌" create="true" read="true" delete="true" update="true"></acl>
+		<acl roleName="数据录入员" moduleName="站点管理" create="true" read="true" delete="true" update="true"></acl>
+		<acl roleName="数据录入员" moduleName="栏目管理" create="true" read="true" delete="true" update="true"></acl>
+		<acl roleName="数据录入员" moduleName="角色管理" create="true" read="true" delete="true" update="true"></acl>
+		
+		<acl roleName="商品管理员" moduleName="用户管理" create="true" read="true" delete="true" update="true"></acl>	
+		<acl roleName="商品管理员" moduleName="角色分配" create="true" read="true" delete="true" update="true"></acl>		
+		<acl roleName="商品管理员" moduleName="商品管理" create="true" read="true" delete="true" update="true"></acl>
+		<acl roleName="商品管理员" moduleName="商品类别" create="true" read="true" delete="true" update="true"></acl>
+		<acl roleName="商品管理员" moduleName="商品品牌" create="true" read="true" delete="true" update="true"></acl>
+		<acl roleName="商品管理员" moduleName="站点管理" create="true" read="true" delete="true" update="true"></acl>
+		<acl roleName="商品管理员" moduleName="栏目管理" create="true" read="true" delete="true" update="true"></acl>
+		<acl roleName="商品管理员" moduleName="角色管理" create="true" read="true" delete="true" update="true"></acl>
+		
+		<acl roleName="大区经理" moduleName="用户管理" create="true" read="true" delete="true" update="true"></acl>	
+		<acl roleName="大区经理" moduleName="角色分配" create="true" read="true" delete="true" update="true"></acl>		
+		<acl roleName="大区经理" moduleName="商品管理" create="true" read="true" delete="true" update="true"></acl>
+		<acl roleName="大区经理" moduleName="商品类别" create="true" read="true" delete="true" update="true"></acl>
+		<acl roleName="大区经理" moduleName="商品品牌" create="true" read="true" delete="true" update="true"></acl>
+		<acl roleName="大区经理" moduleName="站点管理" create="true" read="true" delete="true" update="true"></acl>
+		<acl roleName="大区经理" moduleName="栏目管理" create="true" read="true" delete="true" update="true"></acl>
+		<acl roleName="大区经理" moduleName="角色管理" create="true" read="true" delete="true" update="true"></acl>
+		
+		<acl roleName="总经理" moduleName="用户管理" create="true" read="true" delete="true" update="true"></acl>	
+		<acl roleName="总经理" moduleName="角色分配" create="true" read="true" delete="true" update="true"></acl>		
+		<acl roleName="总经理" moduleName="商品管理" create="true" read="true" delete="true" update="true"></acl>
+		<acl roleName="总经理" moduleName="商品类别" create="true" read="true" delete="true" update="true"></acl>
+		<acl roleName="总经理" moduleName="商品品牌" create="true" read="true" delete="true" update="true"></acl>
+		<acl roleName="总经理" moduleName="站点管理" create="true" read="true" delete="true" update="true"></acl>
+		<acl roleName="总经理" moduleName="栏目管理" create="true" read="true" delete="true" update="true"></acl>
+		<acl roleName="总经理" moduleName="角色管理" create="true" read="true" delete="true" update="true"></acl>
+		
+		<acl roleName="总裁" moduleName="用户管理" create="true" read="true" delete="true" update="true"></acl>	
+		<acl roleName="总裁" moduleName="角色分配" create="true" read="true" delete="true" update="true"></acl>		
+		<acl roleName="总裁" moduleName="商品管理" create="true" read="true" delete="true" update="true"></acl>
+		<acl roleName="总裁" moduleName="商品类别" create="true" read="true" delete="true" update="true"></acl>
+		<acl roleName="总裁" moduleName="商品品牌" create="true" read="true" delete="true" update="true"></acl>
+		<acl roleName="总裁" moduleName="站点管理" create="true" read="true" delete="true" update="true"></acl>
+		<acl roleName="总裁" moduleName="栏目管理" create="true" read="true" delete="true" update="true"></acl>
+		<acl roleName="总裁" moduleName="角色管理" create="true" read="true" delete="true" update="true"></acl>
+	</acls>
+</desksoft>

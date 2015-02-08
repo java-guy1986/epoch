@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<!-- DBCP -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<!-- 
+		 	<property name="driverClassName" value="com.mysql.jdbc.Driver" /> 
+			<property name="url" value="jdbc:mysql://127.0.0.1:3306/test" /> 
+			<property name="username" value="root" />
+			<property name="password" value="root" /> 
+			<property name="maxIdle" value="5" />
+			<property name="maxActive" value="40" />
+		-->
+		<property name="driverClassName" value="${db.driver}" />
+		<property name="url" value="${db.url}" />
+		<property name="username" value="${db.username}" />
+		<property name="password" value="${db.password}" />
+		<property name="maxIdle" value="${db.maxIdle}" />
+		<property name="maxActive" value="${db.maxActive}" />
+		<property name="defaultAutoCommit" value="false" />
+		<property name="timeBetweenEvictionRunsMillis" value="360" />
+		<property name="minEvictableIdleTimeMillis" value="360" />
+		 
+	</bean>
+
+	<!-- TransactionManager定义。 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+    	<tx:attributes>
+    		<tx:method name="add*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
+      		<tx:method name="delete*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />  		
+		   <tx:method name="modify*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
+		    <tx:method name="update*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
+		   <tx:method name="find*" read-only="true"/>
+		   <tx:method name="get*" read-only="true"/>
+		   <tx:method name="select*" read-only="true"/>
+    	</tx:attributes>
+    </tx:advice>
+    
+    <!--把事务控制在Service层-->
+    <aop:config>    
+	   <aop:pointcut id="pc" expression="execution(public * com.desksoft.epoch.core.*.service.*.*(..))" /> 
+	   <aop:advisor pointcut-ref="pc" advice-ref="txAdvice" />
+    </aop:config>
+	
+	<!-- MyBatis transactionTemplate -->
+	<bean id="transactionTemplate"
+		class="org.springframework.transaction.support.TransactionTemplate">
+		<property name="transactionManager" ref="transactionManager" />
+	</bean>
+
+	<!-- MyBatis sqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+		<property name="mapperLocations">
+			<list>
+				<value>classpath*:com/desksoft/epoch/core/**/**/*Mapper.xml</value>
+			</list>
+		</property>
+	</bean>
+	<!-- MyBatis sqlSessionTemplate -->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+	<bean id="springContextHolder" class="com.desksoft.epoch.common.SpringContextHolder"></bean>
+	<!-- 
+	<bean id="applicationContext" class="org.apache.axis2.extensions.spring.receivers.ApplicationContextHolder" />
+	 -->
+	 <bean id="wsUserService" class="com.desksoft.epoch.core.base.ws.WsUserService"></bean>
+</beans>

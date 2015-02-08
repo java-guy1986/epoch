@@ -1,0 +1,35 @@
+<html>  
+	<head>  
+		<script src="js/jquery/jquery-1.11.1.js"></script>
+		<script src="js/test/test.js"></script>
+		<style type="text/css">
+			.box{
+				color: red; width: 200px; background-color: green; height: 100px;
+			}
+		</style>
+	</head>  
+	<body>  
+		<p id="dataMethod"><a href="http://www.baidu.com">Data method test</a></p>
+		<ul id="myList">
+			<li id="li_1">list_1</li>
+			<li id="li_2">list_2</li>
+			<li id="li_3">list_3</li>
+			<li id="li_4">list_4</li>
+			<li id="li_5">
+				<div class="content">1234</div>
+			</li>
+		</ul>
+		<p id="register"><a href="#">register</a></p>
+		<p id="login"><a href="#">login</a></p>
+		<p id="trigger"><a href="http://learn.jquery.com">Learn jQuery</a></p>
+		<div class="box">
+		</div>		
+		<p>-----------------------------</p>
+		<form id="myForm" action="front/user/addUser.do" method="post">
+			<input type="text" name="username" id="username"/><br>
+			<input type="text" name="password"/><br>
+			<input type="text" name="registerTime" /><br>
+			<input type="submit" name="submmit"/>
+		</form>
+	</body>  
+</html>  

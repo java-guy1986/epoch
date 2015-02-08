@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	<!-- ===================================================================== -->
+	<!-- 以下是appender的定义 -->
+	<!-- ===================================================================== -->
+	<appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+		<param name="threshold" value="${log.stdout.level}" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{dd HH:mm:ss,SSS\} %-5p] [%t] %c{2\} - %m%n" />
+		</layout>
+	</appender>
+
+	<!-- 记录所有错误日志的appender -->
+	<appender name="ERROR-ALL" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="${log.dir}/epoch-error.log" />
+		<param name="append" value="true" />
+		<param name="encoding" value="UTF-8" />
+		<param name="threshold" value="error" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d [%X{requestURIWithQueryString}] %-5p %c{2} - %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="DEBUG-ALL" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="${log.dir}/epoch-debug.log" />
+		<param name="append" value="true" />
+		<param name="encoding" value="UTF-8" />
+		<param name="threshold" value="${log.stdout.level}" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d [%X{requestURIWithQueryString}] %-5p %c{2} - %m%n" />
+		</layout>
+	</appender>
+
+	<!-- ===================================================================== -->
+	<!-- 以下是logger的定义 -->
+	<!-- ===================================================================== -->
+	<logger name="com.desksoft" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="DEBUG-ALL" />
+		<appender-ref ref="ERROR-ALL" />
+	</logger>
+
+	<logger name="com.apache.ibatis" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="DEBUG-ALL" />
+		<appender-ref ref="ERROR-ALL" />
+	</logger>
+
+	<logger name="org.springframework" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="DEBUG-ALL" />
+		<appender-ref ref="ERROR-ALL" />
+	</logger>
+
+	<logger name="java.sql" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="DEBUG-ALL" />
+		<appender-ref ref="ERROR-ALL" />
+	</logger>
+
+	<!-- ===================================================================== -->
+	<!-- Root logger的定义 -->
+	<!-- ===================================================================== -->
+	<root>
+		<level value="debug" />
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="ERROR-ALL" />
+		<appender-ref ref="DEBUG-ALL" />
+	</root>
+</log4j:configuration>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <!DOCTYPE configuration PUBLIC "-//www.mybatis.org//DTD Config 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-config.dtd"> -->
+<!DOCTYPE configuration PUBLIC "-//www.mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+		<setting name="logImpl" value="LOG4J"/>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	<typeAliases>
+		<package name="com.desksoft.epoch.core.base.model"/>
+	</typeAliases>
+	<typeHandlers>
+		<typeHandler handler="com.desksoft.epoch.common.plugins.handler.BooleanTypeHandler" javaType="Boolean" jdbcType="INTEGER"></typeHandler>
+	</typeHandlers>
+	 <plugins>  
+    	<plugin interceptor="com.desksoft.epoch.common.plugins.PagerHelper"></plugin>  
+	</plugins>  
+</configuration>
