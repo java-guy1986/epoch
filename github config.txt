@@ -1,0 +1,7 @@
+1、git config --global user.name "Your Name Here" 
+2、git config --global user.email "your_email@example.com"  
+3、create repository in github web page
+4、git clone https://github.com/java-guy1986/epoch.git
+5、git add .(add all file into git)
+6、git commit -m "提交填写的内容信息"  (you must commit files to local git, then you can push file to remote git)
+7、git push origin master (push file to remote git)
