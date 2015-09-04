@@ -7,3 +7,5 @@
 7¡¢git push origin master (push file to remote git)
 
 abc submit
+
+delete something
