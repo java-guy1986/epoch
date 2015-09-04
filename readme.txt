@@ -1,4 +1,4 @@
-﻿一:打包发布
+一:打包发布
 1、打包不执行测试
 mvn clean package -Dmaven.test.skip=true
 2、编译（不运行）测试单元
@@ -36,5 +36,7 @@ A、定义了DaoException、ServiceException，但service、dao层的方法签�
 			</props>
 		</property>
 	</bean>
-
+*******************************************************************************************************************
+五、单元测试
+请参考src/test/java中编写的单元测试。
 
